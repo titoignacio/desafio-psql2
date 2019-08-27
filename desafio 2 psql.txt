@@ -1,0 +1,79 @@
+1)movies=# INSERT INTO movies (name, year, genre) VALUES ('Titanic', 1996, 'acción');
+INSERT 0 1
+movies=# INSERT INTO movies (name, year, genre) VALUES ('Duelo de Titanes', 2000, 'drama');
+INSERT 0 1
+movies=# INSERT INTO movies (name, year, genre) VALUES ('Shrek', 2002, 'infantil');
+INSERT 0 1
+movies=# INSERT INTO movies (name, year, genre) VALUES ('Avengers: End Game', 2019, 'acción');
+INSERT 0 1
+movies=# INSERT INTO movies (name, year, genre) VALUES ('El Conjuro', 2013, 'terror');
+INSERT 0 1
+movies=# TABLE movies;
+ id |        name        | year |  genre   
+----+--------------------+------+----------
+  1 | El Rey León        | 1984 | drama
+  3 | El Crimen Perfecto | 2003 | drama
+  4 | Titanic            | 1996 | acción
+  5 | Duelo de Titanes   | 2000 | drama
+  6 | Shrek              | 2002 | infantil
+  7 | Avengers: End Game | 2019 | acción
+  8 | El Conjuro         | 2013 | terror
+(7 rows)
+
+2)movies=# SELECT * FROM movies WHERE id <=4 ORDER BY name LIMIT 3;
+ id |        name        | year | genre  | cost 
+----+--------------------+------+--------+------
+  3 | El Crimen Perfecto | 2003 | drama  | 9000
+  1 | El Rey León        | 1984 | drama  | 9000
+  4 | Titanic            | 1996 | acción | 9000
+
+3)movies=# SELECT * FROM movies WHERE id > 5 ORDER BY year LIMIT 4;
+ id |        name        | year |  genre   | cost 
+----+--------------------+------+----------+------
+  6 | Shrek              | 2002 | infantil | 9000
+  8 | El Conjuro         | 2013 | terror   | 9000
+  7 | Avengers: End Game | 2019 | acción   | 9000
+
+4)movies=# SELECT COUNT(*) FROM movies;
+ count 
+-------
+     7
+
+5)movies=# SELECT year, COUNT(year) FROM movies GROUP BY year;
+ year | count 
+------+-------
+ 2013 |     1
+ 2003 |     1
+ 2000 |     1
+ 1984 |     1
+ 2002 |     1
+ 2019 |     1
+ 1996 |     1
+
+6)movies=# ALTER TABLE movies ADD COLUMN category varchar(30);
+ALTER TABLE
+
+7)UPDATE movies SET category =
+movies-# case
+movies-# WHEN id = 1 then 'infantil'
+movies-# WHEN id = 3 then 'adulto'
+movies-# WHEN id = 4 then 'familiar'
+movies-# WHEN id = 5 then 'familiar'
+movies-# WHEN id = 6 then 'infantil'
+movies-# WHEN id = 7 then 'ciencia ficcion'
+movies-# WHEN id = 8 then 'adulto'
+movies-# end;
+UPDATE 7
+
+8)SELECT category, COUNT(year) FROM movies GROUP BY category;
+    category     | count 
+-----------------+-------
+ ciencia ficcion |     1
+ infantil        |     2
+ familiar        |     2
+ adulto          |     2
+
+
+
+
+
